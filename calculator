@@ -1,108 +1,41 @@
-class Contact:
-    def __init__(self, name, phone, email, address):
-        self.name = name
-        self.phone = phone
-        self.email = email
-        self.address = address
+def calculator():
+    print("Welcome to the simple calculator!")
+    
+    try:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+    except ValueError:
+        print("Invalid input. Please enter valid numbers.")
+        return
 
-    def update(self, name=None, phone=None, email=None, address=None):
-        if name: self.name = name
-        if phone: self.phone = phone
-        if email: self.email = email
-        if address: self.address = address
+    print("Select an operation:")
+    print("1. Add (+)")
+    print("2. Subtract (-)")
+    print("3. Multiply (*)")
+    print("4. Divide (/)")
+    
+    operation = input("Enter the number corresponding to the operation: ")
 
-    def __str__(self):
-        return f"Name: {self.name}, Phone: {self.phone}, Email: {self.email}, Address: {self.address}"
-
-class ContactList:
-    def __init__(self):
-        self.contacts = []
-
-    def add_contact(self, name, phone, email, address):
-        new_contact = Contact(name, phone, email, address)
-        self.contacts.append(new_contact)
-
-    def view_contacts(self):
-        if not self.contacts:
-            print("No contacts available.")
+    if operation == '1':
+        result = num1 + num2
+        print(f"{num1} + {num2} = {result}")
+    elif operation == '2':
+        result = num1 - num2
+        print(f"{num1} - {num2} = {result}")
+    elif operation == '3':
+        result = num1 * num2
+        print(f"{num1} * {num2} = {result}")
+    elif operation == '4':
+        
+        if num2 == 0:
+            print("Error: Division by zero is not allowed.")
         else:
-            print("Contact List:")
-            for contact in self.contacts:
-                print(contact)
+            result = num1 / num2
+            print(f"{num1} / {num2} = {result}")
+    else:
+        print("Invalid operation. Please choose a valid operation.")
+    
 
-    def search_contact(self, search_term):
-        found_contacts = [contact for contact in self.contacts if search_term.lower() in contact.name.lower() or search_term in contact.phone]
-        if found_contacts:
-            for contact in found_contacts:
-                print(contact)
-        else:
-            print("No matching contacts found.")
-
-    def update_contact(self, name, new_name=None, new_phone=None, new_email=None, new_address=None):
-        for contact in self.contacts:
-            if contact.name.lower() == name.lower():
-                contact.update(new_name, new_phone, new_email, new_address)
-                print(f"Contact '{name}' updated.")
-                return
-        print(f"Contact '{name}' not found.")
-
-    def delete_contact(self, name):
-        for contact in self.contacts:
-            if contact.name.lower() == name.lower():
-                self.contacts.remove(contact)
-                print(f"Contact '{name}' deleted.")
-                return
-        print(f"Contact '{name}' not found.")
-
-def display_menu():
-    print("\nContact Management System")
-    print("1. Add Contact")
-    print("2. View Contacts")
-    print("3. Search Contact")
-    print("4. Update Contact")
-    print("5. Delete Contact")
-    print("6. Exit")
-
-def main():
-    contact_list = ContactList()
-
-    while True:
-        display_menu()
-        choice = input("Choose an option (1-6): ")
-
-        if choice == '1':  
-            name = input("Enter name: ")
-            phone = input("Enter phone: ")
-            email = input("Enter email: ")
-            address = input("Enter address: ")
-            contact_list.add_contact(name, phone, email, address)
-
-        elif choice == '2':  
-            contact_list.view_contacts()
-
-        elif choice == '3':  
-            search_term = input("Enter name or phone to search: ")
-            contact_list.search_contact(search_term)
-
-        elif choice == '4':  
-            name = input("Enter the name of the contact to update: ")
-            print("Leave fields empty to keep current values.")
-            new_name = input("Enter new name (leave empty to keep current): ")
-            new_phone = input("Enter new phone (leave empty to keep current): ")
-            new_email = input("Enter new email (leave empty to keep current): ")
-            new_address = input("Enter new address (leave empty to keep current): ")
-            contact_list.update_contact(name, new_name or None, new_phone or None, new_email or None, new_address or None)
-
-        elif choice == '5':  
-            name = input("Enter the name of the contact to delete: ")
-            contact_list.delete_contact(name)
-
-        elif choice == '6':  
-            print("Exiting the contact management system.")
-            break
-
-        else:
-            print("Invalid option, please try again.")
-
-if __name__ == "__main__":
-    main()
+calculator()
+        
+       
